@@ -1,0 +1,69 @@
+<paNavBar></paNavBar>
+<div class="text-center" style="background-color: rgb(41, 161, 184);"><br/><br/><h1 class="text-white">Deep Listening</h1><br/><br/></div>
+<p class="lead">Welcome to Deep Listening. Dive deeper into music and visual art. Share your viewpoint and explore the views of others.</p>
+
+<h2>Find Out More</h2>
+<p>Below are some Deep Listening activities. Each activity helps you to find out more about music and visual art and develop your own interpretations.</p>
+<p>You can explore how others have responded in the <a routerLink="/otherPeople" style="color: rgb(108, 117, 125);">Other People</a> section. But first, try some activities for yourself.</p>
+
+<h2>Take Part</h2>
+<p>Deep Listening activities are organised into themes. Select a theme to begin. Tap on the artwork to start the activity. </p>
+
+<div *ngFor="let theme of getThemes(); let i = index">
+    <div *ngIf="getScriptsOfTheme(theme._id).length > 0" class="accordion " id="accordionFlushExample">
+        <div class="accordion-item">
+        <h2 class="accordion-header" id="{{'heading_' + theme._id}}">
+            <button 
+                style="background-color: rgb(41, 161, 184);"
+                class="accordion-button collapsed text-white" 
+                type="button" 
+                data-bs-toggle="collapse" 
+                [attr.data-bs-target]="'#collapse_' + theme._id"
+                aria-expanded="false" 
+                [attr.aria-controls]="'collapse_'+ theme._id">
+                <span><h5>{{theme.name}}</h5>
+                {{theme.description}}</span>
+            </button>
+        </h2>
+        <div 
+            style="background-color: black;"
+            id="{{'collapse_' + theme._id}}" 
+            class="accordion-collapse collapse text-white" 
+            [attr.aria-labelledby]="'heading_' + theme._id"
+            data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <div *ngFor="let script of getScriptsOfTheme(theme._id); let i = index; let last = last" class="col-sm-12">
+                    <h5 class="col-sm-12">{{script.name}}</h5> 
+                    <div class="col-sm-12">
+                        <p style="white-space: pre-wrap;">{{script.description}}</p>
+                        <figcaption *ngIf="script.author != ''" class="blockquote-footer text-white">{{script.author}}</figcaption>
+                    </div>
+
+                    
+                    <span *ngFor="let artwork of getArtworkFromId(script.homepageartworkid);">
+                        <span *ngIf="artwork.url">
+                            <a routerLink="/slowLooking/{{script._id}}"><img class="col-sm-12" src="{{artwork.url}}" alt="{{artwork.name}}"></a>
+                            <div class="col-sm-12"><strong><span style="white-space: pre-wrap;" [innerHTML]="artwork.name"></span></strong></div>
+                            <div class="col-sm-12"><span style="white-space: pre-wrap;" [innerHTML]="artwork.artist"></span></div>
+                            <div class="col-sm-12">{{artwork.year}}</div>
+                        </span>
+                        <span *ngIf="!artwork.url && artwork.fileLocation">
+                            <p>rr</p>
+                            <img routerLink="/slowLooking/{{script._id}}" class="col-sm-12" src="{{artwork.fileLocation}}" >
+                            <div class="col-sm-12"><strong><span style="white-space: pre-wrap;" [innerHTML]="artwork.name"></span></strong></div>
+                            <div class="col-sm-12"><span style="white-space: pre-wrap;" [innerHTML]="artwork.artist"></span></div>
+                            <div class="col-sm-12">{{artwork.year}}</div>
+                        </span> 
+                    </span><br/>
+                    <div *ngIf="!last" class="col-sm-12">
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+<br/>
+<h2>Other People</h2>
+<button class="btn btn-secondary" routerLink="/otherPeople">Find out how others have responded to these activities</button><br/><br/>
