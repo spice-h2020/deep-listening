@@ -29,7 +29,11 @@ export class ScriptAuthoringComponent {
 
     //URL for accessing the script directly
     scriptURL(script: Script): string {
-        return location.origin.concat("/slowLooking/", script._id);
+        return window.location.origin.concat("/slowLooking/", script._id);
+    }
+
+    responsesURL(script: Script): string {
+        return window.location.origin.concat("/allResponses/", script._id);
     }
 
     toggleStageHelp() {

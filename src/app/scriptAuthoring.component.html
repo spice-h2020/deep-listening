@@ -147,6 +147,16 @@
                             <a routerLink='/slowLooking/{{script._id}}' target='_blank' style='color: rgb(108, 117, 125)'>{{scriptURL(script)}}</a>
                         </span>
                     </td></tr>
+                    <tr ><td class="align-top">
+                        <!-- script visibility -->
+                        <span class="mr-3 font-weight-bold">
+                            Responses URL: 
+                        </span>
+                    </td><td>
+                        <span class="mr-3">
+                            <a routerLink='/allResponses/{{script._id}}' target='_blank' style='color: rgb(108, 117, 125)'>{{responsesURL(script)}}</a>
+                        </span>
+                    </td></tr>
                 </table>
                     <span *ngIf="viewScript==script._id && editScriptDescription=='0' && editScriptStage==0">
                         <span class="float">&nbsp;</span>
@@ -309,7 +319,7 @@
                             />
                             <label class="form-check-label">Closed&nbsp;&nbsp;</label>
                         </div>
-                        <div class = "help-block">Open scripts can be undertaken. If also Public they are shown on the Home page and Other People page. Open scripts can be accessed directly from the URL even if they are Private.</div>
+                        <div class = "help-block">Select Open to allow users to respond to this script, or Closed to prevent any responses. Open scripts can be accessed directly online even if they are Private.</div>
                     </td></tr>
                     <tr><td class="align-top">
                         <!-- script visibility -->
@@ -336,7 +346,7 @@
                             />
                             <label class="form-check-label">Private&nbsp;&nbsp;</label>
                         </div>
-                        <div class = "help-block">Public scripts are shown on the Other People page. If also Open they can be undertaken and are shown on the Home page.</div>
+                        <div class = "help-block">Public scripts are shown on the Other People page. Selecting Public and Open means users can respond to the script and it will also be visible on the Home page.</div>
                     </td></tr><tr><td class="align-top">
                         <!-- script visibility -->
                         <span class="mr-3 font-weight-bold">
@@ -362,7 +372,7 @@
                             />
                             <label class="form-check-label">&nbsp;Approved&nbsp;&nbsp;</label>
                         </div>
-                        <div class = "help-block">Contributions Awaiting approval have to be moderated from the Management page. Approved contributions appear directly on the Other People page.</div>
+                        <div class = "help-block">Awaiting approval means responses have to be moderated from the Management page. Approved means they will appear directly on Other People.</div>
                         <!-- <span class="mr-3">
                             <input
                                 class="form-check-input"
@@ -393,6 +403,16 @@
                     </td><td>
                         <span class="mr-3">
                             <a routerLink='/slowLooking/{{script._id}}' target='_blank' style='color: rgb(108, 117, 125)'>{{scriptURL(script)}}</a>
+                        </span>
+                    </td></tr>
+                    <tr ><td class="align-top">
+                        <!-- script visibility -->
+                        <span class="mr-3 font-weight-bold">
+                            Responses URL: 
+                        </span>
+                    </td><td>
+                        <span class="mr-3">
+                            <a routerLink='/allResponses/{{script._id}}' target='_blank' style='color: rgb(108, 117, 125)'>{{responsesURL(script)}}</a>
                         </span>
                     </td></tr>
                     <tr><td colspan="2">
