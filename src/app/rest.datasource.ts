@@ -31,19 +31,23 @@ import { ConfigSettings } from "./config";
     }
 
     saveUser(user: User): Observable<User> {
-        return this.http.post<User>(this.saveUrl, user, this.configSettings.config);
+        // return this.http.post<User>(this.saveUrl, user, this.configSettings.config);
+        return this.http.post<User>(this.saveUrl, user);
     }
 
     updateUser(user: User) {
-        return this.http.put<User>(`${this.saveUrl}/${user._id}`, user, this.configSettings.config);
+        // return this.http.put<User>(`${this.saveUrl}/${user._id}`, user, this.configSettings.config);
+        return this.http.put<User>(`${this.saveUrl}/${user._id}`, user);
     }
 
     deleteUser(_id: string) {
-        return this.http.delete<User>(`${this.saveUrl}/${_id}`, this.configSettings.config);
+        // return this.http.delete<User>(`${this.saveUrl}/${_id}`, this.configSettings.config);
+        return this.http.delete<User>(`${this.saveUrl}/${_id}`);
     }
     
     // Theme
     getThemeData(): Observable<Theme[]> { 
+        // return this.http.get<Theme[]>(this.themeUrl); 
         return this.http.get<Theme[]>(this.themeUrl, this.configSettings.config); 
     } 
 
@@ -68,15 +72,18 @@ import { ConfigSettings } from "./config";
     } 
 
     saveArtwork(artwork: Artwork): Observable<Artwork> { 
-        return this.http.post<Artwork>(this.saveUrl, artwork, this.configSettings.config); 
+        // return this.http.post<Artwork>(this.saveUrl, artwork, this.configSettings.config); 
+        return this.http.post<Artwork>(this.saveUrl, artwork); 
     }
 
     updateArtwork(artwork: Artwork): Observable<Artwork> {
-        return this.http.put<Artwork>(`${this.saveUrl}/${artwork._id}`, artwork, this.configSettings.config); 
+        // return this.http.put<Artwork>(`${this.saveUrl}/${artwork._id}`, artwork, this.configSettings.config);
+        return this.http.put<Artwork>(`${this.saveUrl}/${artwork._id}`, artwork);  
     }
 
     deleteArtwork(_id: string): Observable<Artwork> { 
-        return this.http.delete<Artwork>(`${this.saveUrl}/${_id}`, this.configSettings.config); 
+        // return this.http.delete<Artwork>(`${this.saveUrl}/${_id}`, this.configSettings.config); 
+        return this.http.delete<Artwork>(`${this.saveUrl}/${_id}`); 
     }
 
     // Script
@@ -85,15 +92,18 @@ import { ConfigSettings } from "./config";
     } 
 
     saveScript(script: Script): Observable<Script> { 
-        return this.http.post<Script>(this.saveUrl, script, this.configSettings.config); 
+        // return this.http.post<Script>(this.saveUrl, script, this.configSettings.config); 
+        return this.http.post<Script>(this.saveUrl, script); 
     }
 
     updateScript(script: Script): Observable<Script> {
-        return this.http.put<Script>(`${this.saveUrl}/${script._id}`, script, this.configSettings.config); 
+        // return this.http.put<Script>(`${this.saveUrl}/${script._id}`, script, this.configSettings.config); 
+        return this.http.put<Script>(`${this.saveUrl}/${script._id}`, script); 
     }
 
     deleteScript(_id: string): Observable<Script> { 
-        return this.http.delete<Script>(`${this.saveUrl}/${_id}`, this.configSettings.config); 
+        // return this.http.delete<Script>(`${this.saveUrl}/${_id}`, this.configSettings.config); 
+        return this.http.delete<Script>(`${this.saveUrl}/${_id}`); 
     }
 
     // Activity
@@ -102,15 +112,18 @@ import { ConfigSettings } from "./config";
     } 
 
     saveActivity(activity: Activity): Observable<Activity> { 
-        return  this.http.post<Activity>(this.saveUrl, activity, this.configSettings.config); 
+        // return  this.http.post<Activity>(this.saveUrl, activity, this.configSettings.config); 
+        return  this.http.post<Activity>(this.saveUrl, activity); 
     }
 
     updateActivity(activity: Activity): Observable<Activity> {
-        return this.http.put<Activity>(`${this.saveUrl}/${activity._id}`, activity, this.configSettings.config); 
+        // return this.http.put<Activity>(`${this.saveUrl}/${activity._id}`, activity, this.configSettings.config); 
+        return this.http.put<Activity>(`${this.saveUrl}/${activity._id}`, activity); 
     }
 
     deleteActivity(_id: string): Observable<Activity> { 
-        return this.http.delete<Activity>(`${this.saveUrl}/${_id}`, this.configSettings.config); 
+        // return this.http.delete<Activity>(`${this.saveUrl}/${_id}`, this.configSettings.config); 
+        return this.http.delete<Activity>(`${this.saveUrl}/${_id}`); 
     }
 
     //Collection query
