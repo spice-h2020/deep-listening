@@ -15,11 +15,11 @@ import { ConfigSettings } from "./config";
     private configSettings = new ConfigSettings;
     
     // Citizen data URLs 
-    private userUrl = 'https://api2.mksmart.org/object/' + this.configSettings.citizenDatasetUUID + '?query=%7B%22type%22:%22user%22%7D&limit=9999'
-    private themeUrl = 'https://api2.mksmart.org/object/' + this.configSettings.citizenDatasetUUID + '?query=%7B%22type%22:%22theme%22%7D&limit=9999';
-    private artworkUrl =  'https://api2.mksmart.org/object/' + this.configSettings.citizenDatasetUUID + '?query=%7B%22type%22:%22artwork%22%7D&limit=9999';
-    private scriptUrl = 'https://api2.mksmart.org/object/' + this.configSettings.citizenDatasetUUID + '?query=%7B%22type%22:%22script%22%7D&limit=9999';
-    private activityUrl = 'https://api2.mksmart.org/object/' + this.configSettings.citizenDatasetUUID + '?query=%7B%22type%22:%22activity%22%7D&limit=9999';
+    private userUrl = 'https://spice.kmi.open.ac.uk/demos/deep-listening-api/object/' + this.configSettings.citizenDatasetUUID + '?query=%7B%22type%22:%22user%22%7D&limit=9999'
+    private themeUrl = 'https://spice.kmi.open.ac.uk/demos/deep-listening-api/object/' + this.configSettings.citizenDatasetUUID + '?query=%7B%22type%22:%22theme%22%7D&limit=9999';
+    private artworkUrl =  'https://spice.kmi.open.ac.uk/demos/deep-listening-api/object/' + this.configSettings.citizenDatasetUUID + '?query=%7B%22type%22:%22artwork%22%7D&limit=9999';
+    private scriptUrl = 'https://spice.kmi.open.ac.uk/demos/deep-listening-api/object/' + this.configSettings.citizenDatasetUUID + '?query=%7B%22type%22:%22script%22%7D&limit=9999';
+    private activityUrl = 'https://spice.kmi.open.ac.uk/demos/deep-listening-api/object/' + this.configSettings.citizenDatasetUUID + '?query=%7B%22type%22:%22activity%22%7D&limit=9999';
     // private saveUrl = 'https://api2.mksmart.org/object/' + this.configSettings.citizenDatasetUUID;
     private saveUrl = 'https://spice.kmi.open.ac.uk/demos/deep-listening-api/object/' + this.configSettings.citizenDatasetUUID;
 
@@ -27,7 +27,8 @@ import { ConfigSettings } from "./config";
 
     // User
     getUserData(): Observable<User[]> {
-        return this.http.get<User[]>(this.userUrl, this.configSettings.config);
+        // return this.http.get<User[]>(this.userUrl, this.configSettings.config);
+        return this.http.get<User[]>(this.userUrl);
     }
 
     saveUser(user: User): Observable<User> {
@@ -47,8 +48,8 @@ import { ConfigSettings } from "./config";
     
     // Theme
     getThemeData(): Observable<Theme[]> { 
-        // return this.http.get<Theme[]>(this.themeUrl); 
-        return this.http.get<Theme[]>(this.themeUrl, this.configSettings.config); 
+        // return this.http.get<Theme[]>(this.themeUrl, this.configSettings.config); 
+        return this.http.get<Theme[]>(this.themeUrl); 
     } 
 
     saveTheme(theme: Theme): Observable<Theme> { 
@@ -68,7 +69,8 @@ import { ConfigSettings } from "./config";
 
     // Artwork
     getArtworkData(): Observable<Artwork[]> { 
-        return this.http.get<Artwork[]>(this.artworkUrl, this.configSettings.config); 
+        // return this.http.get<Artwork[]>(this.artworkUrl, this.configSettings.config); 
+        return this.http.get<Artwork[]>(this.artworkUrl); 
     } 
 
     saveArtwork(artwork: Artwork): Observable<Artwork> { 
@@ -88,7 +90,8 @@ import { ConfigSettings } from "./config";
 
     // Script
     getScriptData(): Observable<Script[]> { 
-        return this.http.get<Script[]>(this.scriptUrl, this.configSettings.config); 
+        // return this.http.get<Script[]>(this.scriptUrl, this.configSettings.config); 
+        return this.http.get<Script[]>(this.scriptUrl); 
     } 
 
     saveScript(script: Script): Observable<Script> { 
@@ -108,7 +111,8 @@ import { ConfigSettings } from "./config";
 
     // Activity
     getActivityData(): Observable<Activity[]> { 
-        return this.http.get<Activity[]>(this.activityUrl, this.configSettings.config); 
+        // return this.http.get<Activity[]>(this.activityUrl, this.configSettings.config); 
+        return this.http.get<Activity[]>(this.activityUrl); 
     } 
 
     saveActivity(activity: Activity): Observable<Activity> { 
