@@ -50,7 +50,7 @@
                 <div class="col-sm-12">{{artwork.year}}</div><br/>
             </div>
 
-            <p class="col-sm-12" style="white-space: pre-wrap;" [innerHTML]="stage.body"></p>
+            <p class="col-sm-12 text-break" style="white-space: pre-wrap;" [innerHTML]="stage.body"></p>
             <span *ngIf="slowLookingMaximumScriptStageIndex == i">
                 <div class="text-center">
                     <button class="m-3 btn btn-warning" (click)="addActivity(); slowLookingScript='0';" routerLink="/home">Save your Deep Viewpoints activity</button>
@@ -177,7 +177,7 @@
                     <div class="col-sm-12">{{artwork.year}}</div><br/>
                 </div>
 
-                <p class="col-sm-12" style="white-space: pre-wrap;" [innerHTML]="stage.body"></p>
+                <p class="col-sm-12 text-break" style="white-space: pre-wrap;" [innerHTML]="stage.body"></p>
                 <div *ngIf="stage.help">
                     <span style="float:right"><img width="20" style="background-color:white;" src="assets/img/question-help.png" (click)="toggleQuestionHelp()"></span>
                     <span class="col-sm-12" style="float:left; white-space: pre-wrap;" *ngIf="showQuestionHelp">{{stage.help}}</span>
@@ -221,7 +221,7 @@
 
                 <p class="col-sm-12" style="white-space: pre-wrap;" [innerHTML]="stage.help"></p>
 
-                <p class="col-sm-12" style="white-space: pre-wrap;" [innerHTML]="stage.body"></p>
+                <p class="col-sm-12 text-break" style="white-space: pre-wrap;" [innerHTML]="stage.body"></p>
 
                 <!-- get the answer -->
                 <textarea class="col-sm-12" rows="3" class="form-control" [(ngModel)]="newStoryAction.answer"></textarea>
