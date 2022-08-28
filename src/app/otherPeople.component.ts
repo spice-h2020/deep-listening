@@ -66,4 +66,18 @@ export class OtherPeopleComponent {
         activity.likes = activity.likes+1;
         this.model.saveActivity(activity);
     }
+
+    swapArtworkUrl(oldURL:string, newURL:string) {
+        const artworks = this.model.getArtworks();
+        let filteredArtworks = artworks.filter(x => x.url == oldURL);
+        for(var filteredArtwork of filteredArtworks) {
+            filteredArtwork.url = newURL;
+            this.model.saveArtwork(filteredArtwork);
+        }
+        console.log(filteredArtworks);
+    }
+
+    foo2() {
+        return "check out google.com here #angular hello amazom.com?  hello @SpiceH2020 my email is p.mulholland@open.ac.uk ";
+    }
 }

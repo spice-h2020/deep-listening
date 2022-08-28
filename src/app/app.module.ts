@@ -21,6 +21,7 @@ import { AllResponsesComponent } from './allResponses.component';
 import { NavBarComponent } from './navBar.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LinkifyPipeModule } from './linkify.pipe';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UserTableComponent,
     UserLoginComponent,
     AllResponsesComponent,
-    NavBarComponent
+    NavBarComponent,
     ],
   imports: [
     BrowserModule,
@@ -47,7 +48,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     MessageModule,
     DragDropModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    LinkifyPipeModule
   ],
   providers: [CurrentUser],
   bootstrap: [SlowLookingComponent]

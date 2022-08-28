@@ -22,7 +22,7 @@
                 <div class="col-sm-12">{{artwork.year}}</div><br/>
             </div> 
 
-            <p class="col-sm-12" style="white-space: pre-wrap;" [innerHTML]="stage.body"></p>
+            <p class="col-sm-12" style="white-space: pre-wrap;" [innerHTML]="stage.body | linkify"></p>
             <span *ngIf="slowLookingMaximumScriptStageIndex == i">
                 <div class="text-center">
                     <button class="m-3 btn btn-warning" (click)="addActivity(); slowLookingScript='0'; " routerLink="/home">Save your Deep Viewpoints activity</button>
@@ -50,7 +50,7 @@
                 <div class="col-sm-12">{{artwork.year}}</div><br/>
             </div>
 
-            <p class="col-sm-12 text-break" style="white-space: pre-wrap;" [innerHTML]="stage.body"></p>
+            <p class="col-sm-12 text-break" style="white-space: pre-wrap;" [innerHTML]="stage.body | linkify"></p>
             <span *ngIf="slowLookingMaximumScriptStageIndex == i">
                 <div class="text-center">
                     <button class="m-3 btn btn-warning" (click)="addActivity(); slowLookingScript='0';" routerLink="/home">Save your Deep Viewpoints activity</button>
@@ -78,7 +78,7 @@
                 <div class="col-sm-12">{{artwork.year}}</div><br/>
             </div>
 
-            <p class="col-sm-12" style="white-space: pre-wrap;" [innerHTML]="stage.body"></p>
+            <p class="col-sm-12" style="white-space: pre-wrap;" [innerHTML]="stage.body | linkify"></p>
             <span *ngIf="slowLookingMaximumScriptStageIndex == i">
                 <div class="text-center">
                     <button class="m-3 btn btn-warning" (click)="addActivity(); slowLookingScript='0';" routerLink="/home">Save your Deep Viewpoints activity</button>
@@ -113,43 +113,65 @@
                 </div>
 
                 <span *ngIf="stage.sequential">
-                    <div class="col-sm-12">{{stage.body[multiquestionIndex]}}</div><br/>
+                    <!-- <div class="col-sm-12">{{stage.body[multiquestionIndex]}}</div><br/> -->
+                    <p class="col-sm-12" style="white-space: pre-wrap;" [innerHTML]="stage.body[multiquestionIndex] | linkify"></p>
                     <textarea [formControl]="answervalue" type="text" rows="3" #answer class="form-control" (keyup)="answerChanged($event)"></textarea>
                     <span *ngIf="submittedAnswer" class="text-warning col-sm-12">Your answer has been saved</span><br/>
                     <span *ngIf="multiquestionIndex <= 0">
-                        <button class="m-3 btn btn-warning" (click)="updateAnswers(multiquestionIndex, answer.value); submittedAnswer=true;">Save</button> 
+                        <button class="m-3 btn btn-warning" disabled="true" (click)="updateAnswers(multiquestionIndex, answer.value); submittedAnswer=true;">Previous</button> 
                     </span>
                     <span *ngIf="multiquestionIndex > 0">
                         <button class="m-3 btn btn-warning" [disabled]="multiquestionIndex <= 0" (click)="updateAnswers(multiquestionIndex, answer.value); setAnswerValue(multiquestionIndex-1); decrementMultiquestionIndex(); submittedAnswer=true;">Previous</button> 
                     </span>
                     <span *ngIf="multiquestionIndex >= stage.body.length-1">
-                        <button class="m-3 btn btn-warning" (click)="updateAnswers(multiquestionIndex, answer.value); submittedAnswer=true;">Save</button> 
+                        <button class="m-3 btn btn-warning" disabled="true" (click)="updateAnswers(multiquestionIndex, answer.value); submittedAnswer=true;">Next</button> 
                     </span>
                     <span *ngIf="multiquestionIndex < stage.body.length-1">
                         <button class="m-3 btn btn-warning" [disabled]="multiquestionIndex >= stage.body.length-1" (click)="updateAnswers(multiquestionIndex, answer.value); setAnswerValue(multiquestionIndex+1); incrementMultiquestionIndex(stage.body.length-1); submittedAnswer=true;">Next</button> 
                     </span>
+                    
+                    <!-- return to list if last stage -->
+                    <span *ngIf="slowLookingMaximumScriptStageIndex == i">
+                        <div class="text-center">
+                            <button class="m-3 btn btn-warning" (click)="updateAnswers(multiquestionIndex, answer.value); submittedAnswer=true; newMultiquestionAction.questionStage = stage; newMultiquestionAction.questions = stage.body; addActionToActivity(newMultiquestionAction); resetNewMultiQuestionAction(); resetAnswerValue(); addActivity(); slowLookingScript='0'; multiquestionIndex=0" routerLink="/home">Save your Deep Viewpoints activity</button>
+                        </div>
+                    </span>
+                    <!-- continue if not last stage -->
+                    <span *ngIf="slowLookingMaximumScriptStageIndex != i">
+                        <div class="text-right">
+                            <button class="m-3 btn btn-warning" (click)="updateAnswers(multiquestionIndex, answer.value); submittedAnswer=true; newMultiquestionAction.questionStage = stage; newMultiquestionAction.questions = stage.body; slowLookingCurrentScriptStageIndex=i+1; addActionToActivity(newMultiquestionAction); resetNewMultiQuestionAction(); resetAnswerValue(); showQuestionHelp=false; submittedAnswer=false; multiquestionIndex=0">Continue</button>
+                        </div>
+                    </span>
+
+                    
+
                 </span>
                 
                 <span *ngIf="!stage.sequential">
-                    <span class="col-sm-12">{{stage.body[multiquestionIndex]}}</span><br/><br/>
-                    <button class="m-3 btn btn-warning" (click)="randomiseQuestion(stage.body.length-1); submittedAnswer=false;">Reload question</button>
+                    <!-- <span class="col-sm-12">{{stage.body[multiquestionIndex]}}</span><br/><br/> -->
+                    <p class="col-sm-12" style="white-space: pre-wrap;" [innerHTML]="stage.body[multiquestionIndex] | linkify"></p>
+                    <!-- <button class="m-3 btn btn-warning" (click)="updateAnswers(multiquestionIndex, answer.value); submittedAnswer=true; randomiseQuestion(stage.body.length-1);">Reload question</button> -->
                     <textarea [formControl]="answervalue" type="text" rows="3" #answer class="form-control" (keyup)="answerChanged($event)"></textarea>
                     <span *ngIf="submittedAnswer" class="text-warning col-sm-12">Your answer has been saved</span><br/>
-                    <button class="m-3 btn btn-warning" (click)="updateAnswers(multiquestionIndex, answer.value); submittedAnswer=true;">Save</button>
+                    <button class="m-3 btn btn-warning" (click)="updateAnswers(multiquestionIndex, answer.value); submittedAnswer=true; randomiseQuestion(stage.body.length-1);">Reload question</button>
+                    <!-- <button class="m-3 btn btn-warning" (click)="updateAnswers(multiquestionIndex, answer.value); submittedAnswer=true;">Save33</button> -->
+              
+                    <!-- return to list if last stage -->
+                    <span *ngIf="slowLookingMaximumScriptStageIndex == i">
+                        <div class="text-center">
+                            <button class="m-3 btn btn-warning" (click)="updateAnswers(multiquestionIndex, answer.value); submittedAnswer=true; newMultiquestionAction.questionStage = stage; newMultiquestionAction.questions = stage.body; addActionToActivity(newMultiquestionAction); resetNewMultiQuestionAction(); resetAnswerValue(); addActivity(); slowLookingScript='0'; multiquestionIndex=0" routerLink="/home">Save your Deep Viewpoints activity</button>
+                        </div>
+                    </span>
+                    <!-- continue if not last stage -->
+                    <span *ngIf="slowLookingMaximumScriptStageIndex != i">
+                        <div class="text-right">
+                            <button class="m-3 btn btn-warning" (click)="updateAnswers(multiquestionIndex, answer.value); submittedAnswer=true; newMultiquestionAction.questionStage = stage; newMultiquestionAction.questions = stage.body; slowLookingCurrentScriptStageIndex=i+1; addActionToActivity(newMultiquestionAction); resetNewMultiQuestionAction(); resetAnswerValue(); showQuestionHelp=false; submittedAnswer=false; multiquestionIndex=0">Continue</button>
+                        </div>
+                    </span>
+
                 </span>
 
-                <!-- return to list if last stage -->
-                <span *ngIf="slowLookingMaximumScriptStageIndex == i">
-                    <div class="text-center">
-                        <button class="m-3 btn btn-warning" (click)="newMultiquestionAction.questionStage = stage; newMultiquestionAction.questions = stage.body; addActionToActivity(newMultiquestionAction); resetNewMultiQuestionAction(); resetAnswerValue(); addActivity(); slowLookingScript='0'; multiquestionIndex=0" routerLink="/home">Save your Deep Viewpoints activity</button>
-                    </div>
-                </span>
-                <!-- continue if not last stage -->
-                <span *ngIf="slowLookingMaximumScriptStageIndex != i">
-                    <div class="text-right">
-                        <button class="m-3 btn btn-warning" (click)="newMultiquestionAction.questionStage = stage; newMultiquestionAction.questions = stage.body; slowLookingCurrentScriptStageIndex=i+1; addActionToActivity(newMultiquestionAction); resetNewMultiQuestionAction(); resetAnswerValue(); showQuestionHelp=false; submittedAnswer=false; multiquestionIndex=0">Continue</button>
-                    </div>
-                </span>
+
 
 
         
@@ -177,7 +199,7 @@
                     <div class="col-sm-12">{{artwork.year}}</div><br/>
                 </div>
 
-                <p class="col-sm-12 text-break" style="white-space: pre-wrap;" [innerHTML]="stage.body"></p>
+                <p class="col-sm-12 text-break" style="white-space: pre-wrap;" [innerHTML]="stage.body | linkify"></p>
                 <div *ngIf="stage.help">
                     <span style="float:right"><img width="20" style="background-color:white;" src="assets/img/question-help.png" (click)="toggleQuestionHelp()"></span>
                     <span class="col-sm-12" style="float:left; white-space: pre-wrap;" *ngIf="showQuestionHelp">{{stage.help}}</span>
@@ -219,9 +241,9 @@
                     <div class="col-sm-12">{{artwork.year}}</div><br/>
                 </div>
 
-                <p class="col-sm-12" style="white-space: pre-wrap;" [innerHTML]="stage.help"></p>
+                <p class="col-sm-12" style="white-space: pre-wrap;" [innerHTML]="stage.help | linkify"></p>
 
-                <p class="col-sm-12 text-break" style="white-space: pre-wrap;" [innerHTML]="stage.body"></p>
+                <p class="col-sm-12 text-break" style="white-space: pre-wrap;" [innerHTML]="stage.body | linkify"></p>
 
                 <!-- get the answer -->
                 <textarea class="col-sm-12" rows="3" class="form-control" [(ngModel)]="newStoryAction.answer"></textarea>
